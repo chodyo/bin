@@ -1,0 +1,4 @@
+#!/bin/bash
+# Connect to Brannigan's rPi
+
+ssh cody@192.168.1.175
