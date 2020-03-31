@@ -1,0 +1,26 @@
+#!/bin/bash
+###########################################
+## Wallz - A wallpaper changer for lxde ## 
+#########################################  
+
+# Load user environment maybe?
+export DISPLAY=:0
+export XAUTHORITY=/home/${USER}/.Xauthority
+export XDG_RUNTIME_DIR=/run/user/1002
+
+## Settings - Put your dir to your wallpaper folder here.. (like: /home/pi/Pictures/Wallpapers)
+dir='/home/${USER}/Pictures/Wallpapers'
+
+## Step one - Random File selection
+file=`/bin/ls -1 "$dir" | sort --random-sort | head -1`
+path=`readlink --canonicalize "$dir/$file"`
+
+## Step two - pushing result to pcmanfm (Which manages the wallpaper ^^)
+pcmanfm --set-wallpaper="$path"
+
+## Step Three - exit
+exit 0
+
+## Credits:
+# http://stackoverflow.com/questions/701505/best-way-to-choose-a-random-file-from-a-directory-in-a-shell-script
+# foxy (me)
