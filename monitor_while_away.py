@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 # usage: monitor_while_away.py
 
 import requests, sys, syslog, time
@@ -33,7 +32,7 @@ def monitor():
                         requests.get(URL+"pause")
                 elif not recently_home(last_home_time) and not active:
                         syslog.syslog(syslog.LOG_INFO, "no one is home, starting motion")
-                        command_motion(URL+"start")
+                        requests.get(URL+"start")
 
                 time.sleep(SLEEP)
 
@@ -46,9 +45,6 @@ def motion_active():
         if "Detection status ACTIVE" in resp.text:
                 return True
         return False
-
-def command_motion(command):
-        resp = requests.get(url=URL+command)
 
 if __name__ == '__main__':
         main()
